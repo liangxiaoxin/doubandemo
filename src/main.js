@@ -15,6 +15,7 @@ import charts from './components/charts/charts'
 import hot from './components/hot/hot'
 import ing from './components/ing/ing'
 import newmovie from './components/newmovie/newmovie'
+import test from './components/test/test'
 const router = new VueRouter({
   linkActiveClass: 'active',
   mode: 'history',
@@ -27,6 +28,15 @@ const router = new VueRouter({
     {
       path: '/charts',
       component: charts
+    },
+    {
+      path: '/charts/:id',
+      component: charts,
+      children: [
+        {path: 'one', component: ing},
+        {path: 'two', component: newmovie},
+        {path: 'three', component: test}
+        ]
     },
     {
       path: '/hot',

@@ -25,10 +25,27 @@
 
 <script>
   export default {
-    props: {
-      hotMovies: {
-        type: Array
+    props: {},
+    data() {
+      return {
+        hotMovies: [],
+        fenYeData: [],
+        current: 0,
+        loadingShow: true
       }
+    },
+    mounted: function () {
+      this.$http.jsonp('https://api.douban.com/v2/movie/in_theaters?count=8', {}, {
+        headers: {
+        },
+        emulateJSON: true
+      }).then(function(response) {
+        // 这里是处理正确的回调
+        this.hotMovies = response.data.subjects
+      }, function(response) {
+        // 这里是处理错误的回调
+        console.log(response)
+      })
     }
   }
 </script>

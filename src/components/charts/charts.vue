@@ -33,13 +33,29 @@
         </div>
       </div>
     </div>
+    <router-view></router-view>
     <div class="page-wrapper">
       <ul class="page-ul">
         <li class="page">
           <button class="ui left labeled icon button"><i class="left arrow icon"></i> prev</button>
         </li>
-        <li class="page" v-for="(number,index) in 5" @click="goto(index)">
-          <button class="ui secondary basic button">{{ index+1 }}</button>
+        <!--<li class="page" v-for="(number,index) in 5" @click="goto(index)">-->
+          <!--<button class="ui secondary basic button">{{ index+1 }}</button>-->
+        <!--</li>-->
+        <li class="page">
+          <button class="ui secondary basic button">
+            <router-link to="/charts/1/one">1</router-link>
+          </button>
+        </li>
+        <li class="page">
+          <button class="ui secondary basic button">
+            <router-link to="/charts/1/two">2</router-link>
+          </button>
+        </li>
+        <li class="page">
+          <button class="ui secondary basic button">
+            <router-link to="/charts/1/three">3</router-link>
+          </button>
         </li>
         <li class="page">
           <button class="ui right labeled icon button"><i class="right arrow icon"></i> Next</button>

@@ -1,5 +1,5 @@
 <template>
-  <h1>newMovie</h1>
+<h1>test!!!!!</h1>
 </template>
 
 <script type="text/ecmascript-6">
