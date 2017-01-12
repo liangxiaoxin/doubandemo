@@ -1,2 +1,18 @@
-# doubandemo
-vue2.0+vue-router+semantic-ui练习使用嵌套路由实现豆瓣电影分页功能
+# douban-vue
+
+> this is a vue project for douban.
+
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+```
+
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
