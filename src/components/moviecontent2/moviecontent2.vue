@@ -1,7 +1,7 @@
 <template>
   <div class="moviecontent-wrapper">
     <div class="ui four column grid" v-if="chartsMovies.length>2">
-      <div class="ui link cards" v-for="movie in chartsMovies">
+      <div class="ui link cards" v-for="movie in _someMovies">
         <div class="card">
           <div class="image">
             <img :src="movie.images.large" width="100%" height="100%">
@@ -40,6 +40,11 @@
         loadingShow: true
       }
     },
+    computed: {
+      _someMovies() {
+        return this.chartsMovies.splice(this.current, 3)
+      }
+    },
     mounted: function () {
       this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
         headers: {},
@@ -47,7 +52,7 @@
       }).then(function (response) {
         // 这里是处理正确的回调
         // 根据current传过来的值改变chartMovies这个数组
-        this.chartsMovies = response.data.subjects.splice(3, 3)
+        this.chartsMovies = response.data.subjects
       }, function (response) {
         // 这里是处理错误的回调
         console.log(response)

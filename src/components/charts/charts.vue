@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :current="current"></router-view>
     <div class="page-wrapper">
       <ul class="page-ul">
         <li class="page">

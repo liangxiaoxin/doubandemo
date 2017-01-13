@@ -12,7 +12,7 @@ date: 2017-01-12 21:21:50
 
 ### Demo简单介绍
 主路由：Top250(charts)，正在热映(hot)，即将上映(ing)，新片榜(newmovie)
-	
+
 	const router = new VueRouter({
 		routes: [
 		    {
@@ -24,7 +24,7 @@ date: 2017-01-12 21:21:50
 		      component: charts
 		    },
 		    {
-		      path: '/hot', 
+		      path: '/hot',
 		      component: hot
 		    },
 		    {
@@ -43,32 +43,29 @@ date: 2017-01-12 21:21:50
       path: '/charts/:id',  //子路由
       component: charts,
       children: [
-        {path: 'one', component: ing},
-        {path: 'two', component: newmovie},
-        {path: 'three', component: test}
+        {path: '1', component: ing},
+        {path: '2', component: newmovie},
+        {path: '3', component: test}
         ]
     }
-    
+
 在charts组件上添加入口:
 
-	<router-link to="/charts/1/one">1</router-link>
-	<router-link to="/charts/1/two">2</router-link>
-	<router-link to="/charts/1/three">3</router-link>
+	<router-link to="/charts/1/1">1</router-link>
+	<router-link to="/charts/1/2">2</router-link>
+	<router-link to="/charts/1/3">3</router-link>
 
 在charts组件上添加出口:
 
 	<router-view></router-view>
-    
+
 #### 遇见的坑
 
-	<router-link to="/charts/1/one"></router-link>
+	<router-link to="/charts/1/1"></router-link>
 一定要加上这个1,对应→path: '/charts/:id'中的指定id，缺少id是不行的，官方文档有介绍：[动态路由配置](https://router.vuejs.org/zh-cn/essentials/dynamic-matching.html)
- 
+
 demo截图：
 
-分页2：
-![two](static/images/two.png)
-	
 跳到正在热映：
 ![hot](static/images/hot.png)
 
