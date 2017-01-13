@@ -1,4 +1,5 @@
 <template>
+  //实现loading动画
   <div class="loading-wrapper" v-show="loadingShow" >
     <div class="sk-cube-grid">
       <div class="sk-cube sk-cube1"></div>

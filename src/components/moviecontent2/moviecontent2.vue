@@ -11,7 +11,7 @@
             <div class="meta">
               <a v-for="genre in movie.genres">{{genre}}</a>
             </div>
-            <div class="description">{{current}}</div>
+            <div class="description"></div>
           </div>
           <div class="extra content">
             <span class="right floated">{{movie.year}}</span>
@@ -21,15 +21,18 @@
       </div>
     </div>
   </div>
-  {{current}}
 </template>
 
 <script type="text/ecmascript-6">
   export default {
     props: {
       current: {
-        type: Number
+        type: Number,
+        default: 0
       }
+//      loadingShow: {
+//          type: Boolean
+//      }
     },
     data() {
       return {
@@ -44,14 +47,13 @@
       }).then(function (response) {
         // 这里是处理正确的回调
         // 根据current传过来的值改变chartMovies这个数组
-        this.chartsMovies = response.data.subjects.splice(0, 3)
-        console.log(this.chartsMovies)
-        console.log(this.current)
-        this.loadingShow = false
+        this.chartsMovies = response.data.subjects.splice(3, 3)
       }, function (response) {
         // 这里是处理错误的回调
         console.log(response)
       })
+    },
+    components: {
     }
   }
 </script>
