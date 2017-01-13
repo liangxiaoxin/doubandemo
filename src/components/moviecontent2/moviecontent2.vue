@@ -27,8 +27,7 @@
   export default {
     props: {
       current: {
-        type: Number,
-        default: 0
+        type: Number
       }
 //      loadingShow: {
 //          type: Boolean
@@ -42,21 +41,44 @@
     },
     computed: {
       _someMovies() {
+        // 根据current传过来的值改变chartMovies这个数组
         return this.chartsMovies.splice(this.current, 3)
       }
     },
-    mounted: function () {
-      this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
+    route: {
+      data(transition) {
+        // 更新数据的方法
+      }
+    },
+    beforeCreate() {
+      this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=8', {}, {
         headers: {},
         emulateJSON: true
       }).then(function (response) {
         // 这里是处理正确的回调
-        // 根据current传过来的值改变chartMovies这个数组
         this.chartsMovies = response.data.subjects
+        console.log('success')
       }, function (response) {
         // 这里是处理错误的回调
         console.log(response)
       })
+    },
+    watch: {
+      '$route' (to, from) {
+        this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=8', {}, {
+          headers: {},
+          emulateJSON: true
+        }).then(function (response) {
+          // 这里是处理正确的回调
+          this.chartsMovies = response.data.subjects
+          console.log('watch success')
+        }, function (response) {
+          // 这里是处理错误的回调
+          console.log(response)
+        })
+      }
+    },
+    mounted: function () {
     },
     components: {
     }

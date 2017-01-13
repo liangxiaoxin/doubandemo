@@ -64,7 +64,9 @@
       })
     },
     computed: {
+      _activeIndex() {
 
+      }
     },
     methods: {
       goto: function (index) {
