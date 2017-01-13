@@ -1,5 +1,6 @@
 <template>
   <div class="hot-wrapper">
+    <loading :loadingShow="loadingShow"></loading>
     <div class="ui three column grid">
       <div class="ui link cards" v-for="movie in hotMovies">
         <div class="card">
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+  import loading from '../loading/loading.vue'
   export default {
     props: {},
     data() {
@@ -42,10 +44,14 @@
       }).then(function(response) {
         // 这里是处理正确的回调
         this.hotMovies = response.data.subjects
+        this.loadingShow = false
       }, function(response) {
         // 这里是处理错误的回调
         console.log(response)
       })
+    },
+    components: {
+      loading
     }
   }
 </script>
