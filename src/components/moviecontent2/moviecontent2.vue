@@ -39,24 +39,38 @@
         loadingShow: true
       }
     },
+    methods: {
+      getData: function () {
+        this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
+          headers: {},
+          emulateJSON: true
+        }).then(function (response) {
+          // 这里是处理正确的回调
+          // 根据current传过来的值改变chartMovies这个数组
+          this.chartsMovies = response.data.subjects
+          this.loadingShow = false
+          console.log('success')
+        }, function (response) {
+          // 这里是处理错误的回调
+          console.log(response)
+        })
+      }
+    },
     computed: {
       _someMovies() {
         // 根据current传过来的值改变chartMovies这个数组
         return this.chartsMovies.splice(this.current, 3)
       }
     },
-    route: {
-      data(transition) {
-        // 更新数据的方法
-      }
-    },
-    beforeCreate() {
-      this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=8', {}, {
+    created: function () {
+        // 第一次进入实例创建之后，挂载到实例
+      this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
         headers: {},
         emulateJSON: true
       }).then(function (response) {
         // 这里是处理正确的回调
         this.chartsMovies = response.data.subjects
+        this.loadingShow = false
         console.log('success')
       }, function (response) {
         // 这里是处理错误的回调
@@ -64,21 +78,8 @@
       })
     },
     watch: {
-      '$route' (to, from) {
-        this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=8', {}, {
-          headers: {},
-          emulateJSON: true
-        }).then(function (response) {
-          // 这里是处理正确的回调
-          this.chartsMovies = response.data.subjects
-          console.log('watch success')
-        }, function (response) {
-          // 这里是处理错误的回调
-          console.log(response)
-        })
-      }
-    },
-    mounted: function () {
+        // 因为路由切换同一组件时，实例创建的是同一个实例，之后不会再创建了，所以只能调用一次mounted,因此要使用$route监听getData方法，重新调用获取数据
+      '$route': 'getData'
     },
     components: {
     }
