@@ -33,7 +33,7 @@ const router = new VueRouter({
       component: charts
     },
     {
-      path: '/charts/:id',
+      path: '/charts',
       component: charts,
       children: [
         {path: '1', component: moviecontent2},

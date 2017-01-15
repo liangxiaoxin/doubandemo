@@ -30,7 +30,7 @@
         </li>
         <li class="page" v-for="(number,index) in 3" @click="goto(index)">
           <button class="ui secondary basic button">
-            <router-link :to="'/charts/1/'+ (index+1)">{{index+1}}</router-link>
+            <router-link :to="'/charts/'+ (index+1)">{{index+1}}</router-link>
           </button>
         </li>
         <li class="page">
