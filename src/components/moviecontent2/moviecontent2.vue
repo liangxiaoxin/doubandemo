@@ -28,15 +28,14 @@
     props: {
       current: {
         type: Number
+      },
+      controlShow: {
+          type: Object
       }
-//      loadingShow: {
-//          type: Boolean
-//      }
     },
     data() {
       return {
-        chartsMovies: [],
-        loadingShow: true
+        chartsMovies: []
       }
     },
     methods: {
@@ -49,7 +48,7 @@
         }).then(function (response) {
           // 这里是处理正确的回调
           this.chartsMovies = response.data.subjects
-          this.loadingShow = false
+          this.controlShow.loading = false
           console.log('eee')
         }, function (response) {
           // 这里是处理错误的回调
@@ -71,7 +70,7 @@
       }).then(function (response) {
         // 这里是处理正确的回调
         this.chartsMovies = response.data.subjects
-        this.loadingShow = false
+        this.controlShow.loading = false
         console.log('success')
       }, function (response) {
         // 这里是处理错误的回调

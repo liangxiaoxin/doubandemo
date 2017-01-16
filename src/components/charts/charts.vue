@@ -1,6 +1,7 @@
 <template>
   <div class="ing-wrapper">
-    <div class="moviecontent-wrapper" v-if="indexShow">
+    <loading v-show="controlShow.loading"></loading>
+    <div class="moviecontent-wrapper" v-if="controlShow.content">
       <div class="ui four column grid" v-if="chartsMovies.length>2">
         <div class="ui link cards" v-for="movie in chartsMovies">
           <div class="card">
@@ -22,7 +23,7 @@
         </div>
       </div>
     </div>
-    <router-view :current="current"></router-view>
+    <router-view :current="current" :controlShow="controlShow"></router-view>
     <div class="page-wrapper">
       <ul class="page-ul">
         <li class="page">
@@ -41,13 +42,17 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
+  import loading from '../loading/loading'
   export default {
     props: {},
     data() {
       return {
         chartsMovies: [],
-        indexShow: true,
-        current: 0
+        current: 0,
+        controlShow: {
+            loading: true,
+            content: false
+        }
       }
     },
     mounted: function () {
@@ -56,8 +61,9 @@
         emulateJSON: true
       }).then(function (response) {
         // 这里是处理正确的回调
+        this.controlShow.loading = false
+        this.controlShow.content = true
         this.chartsMovies = response.data.subjects
-        console.log(this.chartsMovies)
       }, function (response) {
         // 这里是处理错误的回调
         console.log(response)
@@ -72,13 +78,13 @@
       goto: function (index) {
         this.current = index * 3
         console.log(this.current)
+        this.controlShow.content = false
+        this.controlShow.loading = true
         // 控制首页是否显示
-        if (index >= 0) {
-            this.indexShow = false
-        }
       }
     },
     components: {
+        loading
     }
   }
 </script>
