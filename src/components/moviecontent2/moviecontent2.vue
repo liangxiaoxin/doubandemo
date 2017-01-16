@@ -41,15 +41,16 @@
     },
     methods: {
       getData: function () {
+          // 优化，先另chartMoves等于空数组
+        this.chartsMovies = []
         this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
           headers: {},
           emulateJSON: true
         }).then(function (response) {
           // 这里是处理正确的回调
-          // 根据current传过来的值改变chartMovies这个数组
           this.chartsMovies = response.data.subjects
           this.loadingShow = false
-          console.log('success')
+          console.log('eee')
         }, function (response) {
           // 这里是处理错误的回调
           console.log(response)
