@@ -1,6 +1,6 @@
 <template>
   <div class="hot-wrapper">
-    <loading :loadingShow="loadingShow"></loading>
+    <loading v-show="controlShow.loading"></loading>
     <div class="ui three column grid">
       <div class="ui link cards" v-for="movie in hotMovies">
         <div class="card">
@@ -27,13 +27,15 @@
 <script>
   import loading from '../loading/loading.vue'
   export default {
-    props: {},
+    props: {
+    },
     data() {
       return {
         hotMovies: [],
-        fenYeData: [],
-        current: 0,
-        loadingShow: true
+        controlShow: {
+          loading: true,
+          content: false
+        }
       }
     },
     mounted: function () {
@@ -44,7 +46,7 @@
       }).then(function(response) {
         // 这里是处理正确的回调
         this.hotMovies = response.data.subjects
-        this.loadingShow = false
+        this.controlShow.loading = false
       }, function(response) {
         // 这里是处理错误的回调
         console.log(response)

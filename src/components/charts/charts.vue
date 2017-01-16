@@ -29,7 +29,7 @@
         <li class="page">
           <button class="ui left labeled icon button"><i class="left arrow icon"></i> prev</button>
         </li>
-        <li class="page" v-for="(number,index) in 3" @click="goto(index)">
+        <li class="page" v-for="(number,index) in 3" @click="goto(index)" :class="{'active': current/3===index}">
           <button class="ui secondary basic button">
             <router-link :to="'/charts/'+ (index+1)">{{index+1}}</router-link>
           </button>
@@ -101,6 +101,8 @@
         margin: 0 auto
         text-align: center
       .page
-        flex: 1
+        margin: 0 20px
+      .active
+        background-color: skyblue;
 </style>
 

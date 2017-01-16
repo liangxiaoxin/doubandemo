@@ -39,22 +39,22 @@
       }
     },
     methods: {
-      getData: function () {
-          // 优化，先另chartMoves等于空数组
-        this.chartsMovies = []
-        this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
-          headers: {},
-          emulateJSON: true
-        }).then(function (response) {
-          // 这里是处理正确的回调
-          this.chartsMovies = response.data.subjects
-          this.controlShow.loading = false
-          console.log('eee')
-        }, function (response) {
-          // 这里是处理错误的回调
-          console.log(response)
-        })
-      }
+//      getData: function () {
+//          // 优化，先另chartMoves等于空数组
+//        this.chartsMovies = []
+//        this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
+//          headers: {},
+//          emulateJSON: true
+//        }).then(function (response) {
+//          // 这里是处理正确的回调
+//          this.chartsMovies = response.data.subjects
+//          this.controlShow.loading = false
+//          console.log('eee')
+//        }, function (response) {
+//          // 这里是处理错误的回调
+//          console.log(response)
+//        })
+//      }
     },
     computed: {
       _someMovies() {
@@ -79,7 +79,23 @@
     },
     watch: {
         // 因为路由切换同一组件时，实例创建的是同一个实例，之后不会再创建了，所以只能调用一次mounted,因此要使用$route监听getData方法，重新调用获取数据
-      '$route': 'getData'
+//      '$route': 'getData'
+      current: function () {
+        // 优化，先另chartMoves等于空数组
+        this.chartsMovies = []
+        this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
+          headers: {},
+          emulateJSON: true
+        }).then(function (response) {
+          // 这里是处理正确的回调
+          this.chartsMovies = response.data.subjects
+          this.controlShow.loading = false
+          console.log('eee')
+        }, function (response) {
+          // 这里是处理错误的回调
+          console.log(response)
+        })
+      }
     },
     components: {
     }
